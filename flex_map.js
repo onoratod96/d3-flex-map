@@ -10,7 +10,7 @@
   but if you are doing tracts they would both have to contain 11 digit FIPS for instance.
 ***/
 
-function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVariable) {
+function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVariable, legend_title) {
     // Canvas size
     var width = 1000,
     height = 800;
@@ -19,7 +19,7 @@ function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVa
     var data = {};
 
     // Coloring function
-    var color = d3.scaleQuantile(d3.schemeReds[9]);
+    var color = d3.scaleQuantile(d3.schemeRdPu[9]); 
 
     // Set the projection
     var projection = d3.geoAlbersUsa()
@@ -60,7 +60,7 @@ function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVa
       // Add a legend using Mike Bostock's legend code in legend.js
       svg.append("g")
         .attr("transform", "translate(600,100)")
-        .append(() => legend({color, title: "Reported COVID-19 Cases", ticks : 9, tickFormat : ".0s", width: 300}));
+        .append(() => legend({color, title: legend_title, ticks : 9, tickFormat : ".0s", width: 300}));
 
     // Draw the map and add the fill
     svg.append("g")

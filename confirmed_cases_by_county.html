@@ -1,0 +1,35 @@
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>D3 Flex Mapping</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script> 
+    <script src="legend.js"></script>
+    <script src="flex_map.js"></script>
+
+
+<style>
+
+  /* State styling */
+  .geo {
+    stroke: black;
+    stroke-width: 0.5px;
+  }
+
+</style>
+
+</head>
+
+  <body>
+
+    <script>
+
+      flex_map("us_counties.json", "covid_confirmed_cases_by_county.csv", "total_confirmed_cases", "county_fips", "COUNTY_FIPS", "Confirmed COVID-19 Cases (1/22 - 4/17)");
+
+    </script>
+
+  </body>
+
+</html>
