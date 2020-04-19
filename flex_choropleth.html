@@ -1,0 +1,35 @@
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>D3 Flex Mapping</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script> 
+    <script src="legend.js"></script>
+    <script src="flex_map.js"></script>
+
+
+<style>
+
+  /* State styling */
+  .state {
+    stroke: black;
+    stroke-width: 0.5px;
+  }
+
+</style>
+
+</head>
+
+  <body>
+
+    <script>
+
+      flex_map("us_states.json", "covid_cases.csv", "cases_reported", "state", "STATE");
+
+    </script>
+
+  </body>
+
+</html>
