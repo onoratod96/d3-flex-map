@@ -25,10 +25,6 @@ function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVa
     var projection = d3.geoAlbersUsa()
     .translate( [width/2,height/2] );
 
-    // D3 path using our projection
-    var path = d3.geoPath()
-    .projection(projection);
-
     // Create SVG
     var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -56,6 +52,14 @@ function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVa
 
     // Code to make map
     function make_map(us_states) {
+
+      // Center the projection, should dynamically zoom
+      projection.fitSize([width, height], us_states);
+      // D3 path using our projection
+      var path = d3.geoPath()
+     .projection(projection);
+
+
 
       // Add a legend using Mike Bostock's legend code in legend.js
       svg.append("g")
