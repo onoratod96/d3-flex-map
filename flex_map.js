@@ -69,7 +69,7 @@ function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVa
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("class", "state")
+        .attr("class", "geo")
         .attr("fill", function(d) {
           var value = data[d.properties[geoJsonGeoVariable]];
           if (value) {
