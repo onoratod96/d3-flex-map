@@ -12,7 +12,7 @@ To view the map:
 python -m http.server 8888 &
 ```
 
-This will create a local server on your machine over port 8888. Open your preferred browser, enter `http//:localhost:8888`, and click on the `.html` file you want to view. 
+This will create a local server on your machine over port 8888. Open your preferred browser, enter `http://localhost:8888`, and click on the `.html` file you want to view. 
 
 ## Folder Structure
 
