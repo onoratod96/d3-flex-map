@@ -1,0 +1,26 @@
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>D3 Flex Mapping</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script> 
+    <script src="../js/legend.js"></script>
+    <script src="../js/flex_map.js"></script>
+
+
+<style>
+  /* State styling */
+  .geo {
+    stroke: white;
+    stroke-width: 0.2px;
+  }
+</style>
+</head>
+  <body>
+    <script>
+      flex_map("../geoJSON/nyc_census_tracts.json", "../data/3rd_grade_math_scores_nyc.csv", "raw_math_2015_3_all", "geoid", "geoid", "3rd Grade Math Scores (2015)", 20, 0);
+    </script>
+  </body>
+</html>
