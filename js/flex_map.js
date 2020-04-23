@@ -60,13 +60,6 @@ function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVa
       var path = d3.geoPath()
           .projection(projection);
 
-
-
-      // Add a legend using Mike Bostock's legend code in legend.js
-      svg.append("g")
-          .attr("transform", "translate("+legendTranslateX+","+legendTranslateY+")")
-          .append(() => legend({color, title: legend_title, ticks : 9, tickFormat : ".0s", width: legendWidth}));
-
       // Draw the map and add the fill
       svg.append("g")
           .selectAll("path")
@@ -82,6 +75,11 @@ function flex_map(geoJsonFile, dataFile, fillVariable, geoVariable, geoJsonGeoVa
             } else {
               return "#ccc";
             }
-          });             
+          });      
+
+      // Add a legend using Mike Bostock's legend code in legend.js
+      svg.append("g")
+          .attr("transform", "translate("+legendTranslateX+","+legendTranslateY+")")
+          .append(() => legend({color, title: legend_title, ticks : 9, tickFormat : ".0s", width: legendWidth}));       
     }
 }
