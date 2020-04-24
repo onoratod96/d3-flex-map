@@ -1,0 +1,38 @@
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Map Maker HTML</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script> 
+    <script src="/js/legend.js"></script>
+    <script src="/js/flex_map.js"></script>
+
+
+<style>
+
+</style>
+
+</head>
+
+  <body>
+
+    <script>
+      
+      d3.json("/settings/map_settings.json").then(function(mapSettings) { 
+          flex_map(mapSettings.geoJsonFile, 
+                   mapSettings.dataFile, 
+                   mapSettings.fillVariable, 
+                   mapSettings.geoVariable, 
+                   mapSettings.geoJsonGeoVariable,
+                   mapSettings.legend_title,
+                   mapSettings.legendTranslateX, 
+                   mapSettings.legendTranslateY);
+      });
+
+    </script>
+
+  </body>
+
+</html>

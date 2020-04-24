@@ -36,7 +36,9 @@ def open_webpage(page):
     p = subprocess.Popen('python server_test.py open'.split(" "))
 
     time.sleep(0.5) # wait for server to launch
-    url = "http://localhost:8888/examples/" + page
+    url = "http://localhost:8888/" + page
+
+    print("Serving: " + url)
    
     # here you would call the puppeteer JS!
     #os.system('start %s'%url)
