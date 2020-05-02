@@ -20,6 +20,7 @@ def parseArguments():
 	csv_group.add_argument("-gv", "--geoVariable", help="The name of the column with the geographic identifier.", required=True)
 	csv_group.add_argument("-fv", "--fillVariable", help="The name of the csv column to plot.", required=True)
 	csv_group.add_argument("-gjv", "--geoJsonGeoVariable", help="The name of the geographic identifier in the geoJSON file.", required=True)
+	csv_group.add_argument("-sd", "--saveDirectory", help="The directory where the image should be saved.", required=True)
 
 	args = parser.parse_args()
 
@@ -29,47 +30,44 @@ def parseArguments():
 def populateSettings(args):
 	with open('settings/default_settings.json') as json_file:
 		settings = json.load(json_file)
-	
-	# Turn args into dictionary
-	args_dict = vars(args)
+
 
 	# Loop over the arguments and overwrite 
-	for key in args_dict:
+	for key in args:
 		# if argument is not null or space
-		if (args_dict[key] and not str(args_dict[key]).isspace()):
-			settings[key] = args_dict[key]
+		if (args[key] and not str(args[key]).isspace()):
+			settings[key] = args[key]
 
 	# write the settings to map_settings.json
 	with open('settings/map_settings.json', 'w') as json_file:
 		json.dump(settings, json_file)
 
 # Asynchronous function to take a screenshot using pyppeteer
-async def screenshot(url):
+async def screenshot(url, path):
     browser = await launch(headless=True)
     page = await browser.newPage()
 
     print("Processing HTML and D3...")
     await page.goto(url, {'waitUntil': 'networkidle2'})
-    await page.screenshot({'path': 'screenshot.png', 'fullPage': True})
+    await page.screenshot({'path': path, 'fullPage': True})
     #await page.pdf({'path': 'screenshot.pdf', 'landscape' : True,  'format': 'A4'});
-    #await browser.close()
+    await browser.close()
     print("Done!")
 
 
-#args = parseArguments()
-#print(args)
-#populateSettings(args)
+args = vars(parseArguments())
+populateSettings(args)
 
 # Open local host over port 8888
-print("Creating local host over port 8889...")
+print("Creating local host over port 8888...")
 startupinfo = subprocess.STARTUPINFO()
-startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-p = subprocess.Popen("python -m http.server 8889".split(" "), startupinfo=startupinfo)
+startupinfo.dwFlags = subprocess.STARTF_USESHOWWINDOW
+p = subprocess.Popen("python -m http.server 8888".split(" "), startupinfo=startupinfo)
 # Wait for the server to get up and running
 time.sleep(0.5)
-print("Taking screenshot...")
-asyncio.get_event_loop().run_until_complete(screenshot("http://localhost:8889/map.html"))
+print("Saving file: " + args["saveDirectory"])
+asyncio.get_event_loop().run_until_complete(screenshot("http://localhost:8888/map.html", args["saveDirectory"]))
 
 p.terminate()
 
-os.system("start screenshot.png")
+os.system("start " + args["saveDirectory"])
